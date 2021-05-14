@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+    {% for i in products %}
+        <div class="product_block">
+            <a href="{{ i.id }}/">
+                <h1>{{ i.title }}</h1>
+            </a>
+            <h3>{{ i.description }}</h3>
+            <p style="color: greenyellow">Цена: {{ i.price }}</p>
+            <b><p>Категория: {{ i.category }}</p></b>
+            <i><b><p>{{ i.reviews }}</p></b></i>
+        </div>
+    {% endfor %}
+
+
+</body>
+</html>

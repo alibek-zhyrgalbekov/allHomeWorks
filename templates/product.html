@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.title }}</title>
+</head>
+<body>
+    <h1>{{ product.title }}</h1>
+    <h3>{{ product.description }}</h3>
+    <p style="color: greenyellow">Цена: {{ product.price }}</p>
+    <b><p>Категория: {{ product.category }}</p></b>
+
+    <h3>Комментарии:</h3>
+    {% for i in reviews %}
+        <b><p>{{ i.text }}</p></b>
+        <hr>
+    {% endfor %}
+</body>
+</html>
