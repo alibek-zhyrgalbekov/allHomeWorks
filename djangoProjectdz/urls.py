@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', dz1.get_products),
     path('products/<int:id>/', dz1.get_product),
+    path('prod/', dz1.prod),
+
 ]
