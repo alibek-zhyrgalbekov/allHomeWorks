@@ -1,6 +1,8 @@
+from django.contrib import auth
 from django.shortcuts import render, redirect
-from dz1.forms import CategoryForm
+from dz1.forms import CategoryForm, UserCreationForm, LoginForm, ProductForm
 from dz1.models import *
+
 
 # Create your views here.
 
@@ -45,3 +47,63 @@ def prod(request):
         'form': CategoryForm
     }
     return render(request, 'prod.html', context=data)
+
+
+def register(request):
+    if request.method == "GET":
+        return render(request, 'register.html', context={'form': UserCreationForm})
+
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/admin/')
+        else:
+            return render(request, 'register.html', context={'form': form})
+
+
+def login(request):
+    categories = Category.objects.all()
+
+    if request.method == 'POST':
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = auth.authenticate(username=username, password=password)
+            if user:
+                auth.login(request, user)
+            redirect('/')
+            return render(request, 'login.html', context={
+                'user': user,
+                'categories': categories
+            })
+
+    data = {
+        'categories': categories,
+        'form': LoginForm
+    }
+
+    return render(request, 'login.html', context=data)
+
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(data=request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/products/')
+        else:
+            data = {
+                'form': ProductForm(),
+                'username': auth.get_user(request).username
+            }
+            return render(request, 'add_product.html', context=data)
+
+    data = {
+        'form': ProductForm(),
+        'username': auth.get_user(request).username
+    }
+    return render(request, 'add_product.html', context=data)

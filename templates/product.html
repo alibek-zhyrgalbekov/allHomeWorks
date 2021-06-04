@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ product.title }}</title>
-</head>
-<body>
+{% extends 'products.html' %}
+
+{% block content %}
     <h1>{{ product.title }}</h1>
     <h3>{{ product.description }}</h3>
     <p style="color: greenyellow">Цена: {{ product.price }}</p>
@@ -15,5 +11,4 @@
         <b><p>{{ i.text }}</p></b>
         <hr>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

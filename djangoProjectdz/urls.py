@@ -22,5 +22,8 @@ urlpatterns = [
     path('products/', dz1.get_products),
     path('products/<int:id>/', dz1.get_product),
     path('prod/', dz1.prod),
+    path('register/', dz1.register),
+    path('login/', dz1.login),
+    path('add_product/', dz1.add_product),
 
 ]
